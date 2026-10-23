@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TwoLeaf example</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components/bundle.css">
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="components/bundle.js"></script>
+<style>.app{display:flex;min-height:100vh}.main{flex:1;min-width:0;display:flex;flex-direction:column}.content{padding:32px;display:flex;flex-direction:column;gap:24px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+  try { var saved = localStorage.getItem("twoleaf-theme"); } catch (e) {}
+  var theme = saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", theme);
+  var T = window.TwoLeaf, h = React.createElement;
+  function App() {
+    return h("div", { className: "app" },
+      h(T.Sidebar, { orgName: "Tegat Tea Factory", orgSubtitle: "TLF-KCO-FAC-000014",
+        groups: [{ items: [{ label: "Dashboard", icon: "home", active: true }, { label: "Deliveries", icon: "scale" }, { label: "Farmers", icon: "users" }] },
+                 { label: "Reports", items: [{ label: "Quality", icon: "leaf" }, { label: "Disputes", icon: "alert", count: 7 }] }],
+        footer: h(T.ThemeToggle, null) }),
+      h("div", { className: "main" },
+        h("div", { className: "content" },
+          h("h1", { className: "h1", style: { margin: 0 } }, "Dashboard"),
+          h("div", { className: "grid" },
+            h(T.StatCard, { label: "Kilos this month", value: "48,215", unit: "kg", delta: 6.2 }),
+            h(T.StatCard, { label: "Active farmers", value: "1,284", delta: -1.4 }),
+            h(T.Card, { title: "Fine leaf" }, h(T.QualityMeter, { value: 68, label: "TG-043" }))),
+          h(T.DataTable, { columns: [{ key: "d", label: "Date" }, { key: "f", label: "Farmer", render: function (r) { return h(T.IdTag, { value: r.f, copyable: false }); } }, { key: "kg", label: "Kilos", align: "right" }, { key: "s", label: "Status", render: function (r) { return h(T.Badge, { tone: r.t }, r.s); } }],
+            rows: [{ id: 1, d: "21 Oct 2026", f: "TG-043 / 123", kg: "38.5", s: "Synced", t: "success" }, { id: 2, d: "21 Oct 2026", f: "TG-043 / 087", kg: "41.0", s: "Pending", t: "warning" }] }))));
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+</script>
+</body>
+</html>

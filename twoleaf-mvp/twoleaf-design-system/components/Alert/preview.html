@@ -1,0 +1,12 @@
+<!-- @dsCard group="Status" height=230 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>preview</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var T = window.TwoLeaf, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'tl-stack'}, h(T.Alert,{tone:'success',title:'Delivery recorded'},'412 kg added to TG-043. The farmer will get an SMS.'), h(T.Alert,{tone:'warning',title:'Working offline'},'3 deliveries will sync when you are back online.'), h(T.Alert,{tone:'danger',title:'Scale reading rejected'},'The reading is above the scale maximum. Weigh again.')));
+</script>
+</body>
+</html>

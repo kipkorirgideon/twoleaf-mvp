@@ -1,0 +1,82 @@
+/* TwoLeaf Design System — generated from tokens.json */
+:root, [data-theme="light"] {
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --surface-muted: #F5F9F3;
+  --surface-sunken: #EEF6EA;
+  --border: #D9E5D6;
+  --border-strong: #74896F;
+  --text: #1C2A20;
+  --text-muted: #5B6B60;
+  --primary: #2E7D3F;
+  --primary-hover: #256A34;
+  --primary-strong: #1F5130;
+  --primary-soft: #E3F1DD;
+  --on-primary: #FFFFFF;
+  --bud: #8CC152;
+  --success-fg: #1E6B34;
+  --success-bg: #E3F1DD;
+  --warning-fg: #8A5A12;
+  --warning-bg: #FBF0DC;
+  --danger-fg: #B42318;
+  --danger-bg: #FDECEA;
+  --info-fg: #1F5FA8;
+  --info-bg: #E6EFFA;
+  --focus: #2E7D3F;
+  --shadow-sm: 0 1px 2px rgba(28, 42, 32, 0.06);
+  --shadow-md: 0 6px 20px rgba(28, 42, 32, 0.10);
+}
+[data-theme="dark"] {
+  --bg: #0F1A13;
+  --surface: #16241B;
+  --surface-muted: #1C2D22;
+  --surface-sunken: #122018;
+  --border: #2A3D30;
+  --border-strong: #5C7A63;
+  --text: #E7F0E8;
+  --text-muted: #A3B5A8;
+  --primary: #6FBF5A;
+  --primary-hover: #82CC6E;
+  --primary-strong: #A9D77E;
+  --primary-soft: #1F3A25;
+  --on-primary: #0F1A13;
+  --bud: #8CC152;
+  --success-fg: #8FD27A;
+  --success-bg: #1D3A24;
+  --warning-fg: #F0C27A;
+  --warning-bg: #3A2C14;
+  --danger-fg: #F59A90;
+  --danger-bg: #3D1D1A;
+  --info-fg: #8EBBF0;
+  --info-bg: #182B42;
+  --focus: #8CC152;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --font-display: Poppins, "Segoe UI", system-ui, sans-serif;
+  --font-sans: Inter, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+.display { font-family: var(--font-display); font-size: 40px; line-height: 48px; font-weight: 600; letter-spacing: -0.5px; }
+.h1 { font-family: var(--font-display); font-size: 28px; line-height: 36px; font-weight: 600; }
+.h2 { font-family: var(--font-display); font-size: 21px; line-height: 28px; font-weight: 600; }
+.h3 { font-family: var(--font-display); font-size: 17px; line-height: 24px; font-weight: 600; }
+.body-lg { font-family: var(--font-sans); font-size: 17px; line-height: 26px; font-weight: 400; }
+.body { font-family: var(--font-sans); font-size: 15px; line-height: 22px; font-weight: 400; }
+.body-sm { font-family: var(--font-sans); font-size: 13px; line-height: 18px; font-weight: 400; }
+.label { font-family: var(--font-sans); font-size: 13px; line-height: 16px; font-weight: 500; letter-spacing: 0.1px; }
+.overline { font-family: var(--font-sans); font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: 0.8px; }
+.number { font-family: var(--font-sans); font-size: 28px; line-height: 32px; font-weight: 600; letter-spacing: -0.3px; }
+.id { font-family: var(--font-mono); font-size: 13px; line-height: 18px; font-weight: 500; }

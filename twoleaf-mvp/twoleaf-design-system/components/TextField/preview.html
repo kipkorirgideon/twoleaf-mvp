@@ -1,0 +1,12 @@
+<!-- @dsCard group="Forms" height=190 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>preview</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var T = window.TwoLeaf, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'tl-row',style:{alignItems:'flex-start'}}, h(T.TextField,{label:'Farmer ID',placeholder:'FMR-0004817',hint:'Scan the QR card or type the short form'}), h(T.TextField,{label:'Kilos delivered',defaultValue:'-4',error:'Kilos must be more than 0'})));
+</script>
+</body>
+</html>

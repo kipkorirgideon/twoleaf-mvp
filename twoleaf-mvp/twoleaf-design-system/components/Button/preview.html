@@ -1,0 +1,12 @@
+<!-- @dsCard group="Actions" height=88 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>preview</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var T = window.TwoLeaf, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'tl-row'}, h(T.Button,null,'Record delivery'), h(T.Button,{variant:'secondary',icon:'file'},'Export statement'), h(T.Button,{variant:'ghost'},'View details'), h(T.Button,{variant:'danger',icon:'alert'},'Open dispute'), h(T.Button,{size:'sm'},'Small'), h(T.Button,{disabled:true},'Disabled')));
+</script>
+</body>
+</html>

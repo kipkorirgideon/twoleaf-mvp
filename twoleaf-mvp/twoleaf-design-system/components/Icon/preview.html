@@ -1,0 +1,12 @@
+<!-- @dsCard group="Brand" height=64 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>preview</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var T = window.TwoLeaf, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{className:'tl-row',style:{color:'var(--primary)'}}, ['home','leaf','scale','users','chart','file','alert','check','info','settings','sun','moon','copy','map','logout'].map(function(n){return h(T.Icon,{key:n,name:n,label:n})})));
+</script>
+</body>
+</html>

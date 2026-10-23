@@ -1,0 +1,12 @@
+<!-- @dsCard group="Navigation" height=620 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>preview</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var T = window.TwoLeaf, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{style:{height:600,display:'flex'}}, h(T.Sidebar,{orgName:'Tegat Tea Factory',orgSubtitle:'TLF-KCO-FAC-000014',logoUrl:'/_blob/3a075da3cb5bdcf33d071c05cdb50f65',groups:[{items:[{label:'Dashboard',icon:'home',active:true},{label:'Deliveries',icon:'scale'},{label:'Farmers',icon:'users'},{label:'Buying centres',icon:'map'}]},{label:'Reports',items:[{label:'Quality',icon:'leaf'},{label:'Bonus',icon:'chart'},{label:'Disputes',icon:'alert',count:7},{label:'Audit packs',icon:'file'}]}],footer:h(T.ThemeToggle,null)})));
+</script>
+</body>
+</html>

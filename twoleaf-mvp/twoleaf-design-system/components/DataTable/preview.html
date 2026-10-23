@@ -1,0 +1,12 @@
+<!-- @dsCard group="Data" height=260 -->
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>preview</title></head>
+<body>
+<div id="root"></div>
+<script>
+  var T = window.TwoLeaf, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h('div',{style:{padding:16}}, h(T.DataTable,{columns:[{key:'date',label:'Date'},{key:'centre',label:'Buying centre',render:function(r){return h(T.IdTag,{value:r.centre,copyable:false})}},{key:'kg',label:'Kilos',align:'right'},{key:'q',label:'Fine leaf',align:'right'},{key:'s',label:'Status',render:function(r){return h(T.Badge,{tone:r.tone},r.s)}}],rows:[{id:1,date:'21 Oct 2026',centre:'TG-043',kg:'38.5',q:'66%',s:'Synced',tone:'success'},{id:2,date:'21 Oct 2026',centre:'TG-043',kg:'41.0',q:'58%',s:'Pending',tone:'warning'},{id:3,date:'20 Oct 2026',centre:'TG-051',kg:'29.5',q:'71%',s:'Disputed',tone:'danger'}]})));
+</script>
+</body>
+</html>
