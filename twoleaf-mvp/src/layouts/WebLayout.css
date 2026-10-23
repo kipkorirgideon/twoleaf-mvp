@@ -1,0 +1,83 @@
+/* Web layout (county, factory). Tokens only. */
+
+.wl {
+  display: grid; grid-template-columns: 260px minmax(0, 1fr);
+  min-height: calc(100dvh - var(--demo-bar-height, 0px));
+  background: var(--bg);
+}
+
+/* Sidebar column: sticky under the demo bar, scrolls on its own */
+.wl-side {
+  position: sticky; top: var(--demo-bar-height, 0px);
+  height: calc(100dvh - var(--demo-bar-height, 0px));
+  overflow-y: auto; overscroll-behavior: contain;
+}
+.wl-side .wl-sidebar { min-height: 100%; }
+
+.wl-topbar, .wl-close-btn, .wl-backdrop { display: none; }
+
+.wl-main { min-width: 0; }
+.wl-content {
+  width: 100%; max-width: 1280px; margin: 0 auto;
+  padding: var(--space-6);
+  display: flex; flex-direction: column; gap: var(--space-5);
+}
+
+/* Page header */
+.wl-page-header { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+.wl-page-header-text { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.wl-page-title { overflow-wrap: anywhere; }
+.wl-page-sub { color: var(--text-muted); }
+.wl-page-meta { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+.wl-page-actions { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); }
+.wl-back {
+  display: inline-flex; align-items: center; gap: var(--space-1); align-self: flex-start;
+  min-height: 32px; margin-bottom: var(--space-1);
+  font: 500 14px/20px var(--font-sans); color: var(--primary); text-decoration: none;
+}
+.wl-back:hover { text-decoration: underline; }
+.wl-back .tl-icon { width: 16px; height: 16px; }
+
+/* Error state */
+.wl-load-error { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); }
+.wl-load-error .tl-alert { align-self: stretch; }
+
+/* Under 900px: top bar with a menu button; the sidebar becomes an overlay drawer */
+@media (max-width: 899px) {
+  .wl { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
+
+  .wl-topbar {
+    position: sticky; top: var(--demo-bar-height, 0px); z-index: 30;
+    display: flex; align-items: center; gap: var(--space-3);
+    height: 56px; padding: 0 var(--space-4) 0 var(--space-2);
+    background: var(--surface); border-bottom: 1px solid var(--border);
+  }
+  .wl-topbar-logo { width: 32px; height: 32px; border-radius: var(--radius-sm); object-fit: contain; background: var(--surface-muted); }
+  .wl-topbar-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 600 16px/22px var(--font-display); color: var(--text); }
+
+  .wl-menu-btn, .wl-close-btn {
+    display: grid; place-items: center; width: 44px; height: 44px; flex: none;
+    border: 0; border-radius: var(--radius-md); background: transparent; color: var(--text); cursor: pointer;
+  }
+  .wl-menu-btn:hover, .wl-close-btn:hover { background: var(--surface-muted); }
+
+  .wl-backdrop {
+    display: block; position: fixed; inset: 0; z-index: 50;
+    background: color-mix(in srgb, var(--text) 45%, transparent);
+  }
+
+  .wl-side {
+    position: fixed; top: 0; left: 0; bottom: 0; z-index: 51;
+    width: min(300px, 86vw); height: 100dvh;
+    background: var(--surface); box-shadow: var(--shadow-md);
+    transform: translateX(-100%); visibility: hidden;
+    transition: transform .2s ease, visibility 0s linear .2s;
+  }
+  .wl-side-open { transform: none; visibility: visible; transition: transform .2s ease, visibility 0s; }
+  .wl-side .wl-sidebar { width: 100%; border-right: 0; }
+  .wl-side .tl-sb-brand { padding-right: 52px; }
+  .wl-close-btn { position: absolute; top: var(--space-3); right: var(--space-2); z-index: 1; }
+
+  .wl-content { padding: var(--space-4); gap: var(--space-4); }
+  .wl-page-header { align-items: flex-start; }
+}

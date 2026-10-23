@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TwoLeaf</title>
+    <meta name="description" content="TwoLeaf demo: tea delivery, quality and bonus platform by Mariakani Labs. All data is invented." />
+    <link rel="icon" type="image/png" href="/src/design-system/assets/Logos/twoleaf-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Poppins:wght@500;600;700&display=swap"
+    />
+    <script>
+      // Apply the theme before first paint: saved choice ("twoleaf-theme"), else the device setting.
+      // Same logic as src/design-system/theme.ts.
+      (function () {
+        var t = null;
+        try { t = localStorage.getItem('twoleaf-theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          try { t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'; } catch (e) { t = 'light'; }
+        }
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

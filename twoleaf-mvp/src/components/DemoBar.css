@@ -1,0 +1,76 @@
+/* Demo bar. Tokens only. Height comes from --demo-bar-height (set on .app-root). */
+
+.demo-bar {
+  position: sticky; top: 0; z-index: 40;
+  height: var(--demo-bar-height, 56px);
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  padding: 0 var(--space-5);
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.demo-bar-brand { display: flex; align-items: center; gap: var(--space-2); min-width: 0; }
+.demo-bar-icon { width: 28px; height: 28px; flex: none; border-radius: var(--radius-sm); }
+.demo-bar-name { font: 600 15px/20px var(--font-display); color: var(--text); white-space: nowrap; }
+.demo-bar-pill {
+  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  padding: 2px var(--space-2); border-radius: var(--radius-pill);
+  background: var(--warning-bg); color: var(--warning-fg);
+  font: 500 12px/18px var(--font-sans);
+}
+
+.demo-bar-controls { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
+
+/* "Viewing as" select: label beside the field, not above it */
+.demo-bar .demo-bar-role { flex-direction: row; align-items: center; gap: var(--space-2); min-width: 0; }
+.demo-bar .demo-bar-role label { white-space: nowrap; color: var(--text-muted); }
+.demo-bar .demo-bar-role select { min-height: 40px; min-width: 0; max-width: 200px; padding-right: var(--space-2); }
+
+.demo-bar-theme { flex: none; }
+.demo-bar-reset { flex: none; }
+.demo-bar-reset .tl-btn { white-space: nowrap; }
+
+/* In-page reset confirmation */
+.demo-bar-confirm {
+  position: absolute; top: calc(100% + var(--space-2)); right: var(--space-4); z-index: 41;
+  width: min(380px, calc(100vw - 2 * var(--space-4)));
+  display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+.demo-bar-confirm-actions { display: flex; justify-content: flex-end; gap: var(--space-2); flex-wrap: wrap; }
+
+/* Toast */
+.demo-bar-toast {
+  position: fixed; left: 50%; bottom: var(--space-5); z-index: 60; transform: translateX(-50%);
+  width: max-content; max-width: calc(100vw - 2 * var(--space-4));
+  pointer-events: none;
+}
+.demo-bar-toast .tl-alert { box-shadow: var(--shadow-md); border: 1px solid var(--border); pointer-events: auto; }
+
+@media (max-width: 1099px) {
+  .demo-bar { padding: 0 var(--space-4); }
+  .demo-bar .demo-bar-role label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+/* Narrow: two rows (brand, then controls); the reset button becomes icon-only */
+@media (max-width: 899px) {
+  .demo-bar {
+    flex-direction: column; align-items: stretch; justify-content: center; gap: var(--space-2);
+    padding: var(--space-2) var(--space-4);
+  }
+  .demo-bar-brand { height: 36px; }
+  .demo-bar-controls { height: 44px; gap: var(--space-2); }
+  .demo-bar .demo-bar-role { flex: 1; }
+  .demo-bar .demo-bar-role select { flex: 1; width: 100%; max-width: none; min-height: 44px; }
+  .demo-bar-reset .tl-btn { position: relative; width: 44px; padding: 0; }
+  .demo-bar-reset .tl-btn > span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
+
+/* Very narrow: the theme toggle and reset show icons only. The toggle's words stay in the
+   DOM (font-size 0), so each button keeps its accessible name "Light" / "Dark". */
+@media (max-width: 599px) {
+  .demo-bar .tl-toggle button { font-size: 0; gap: 0; min-width: 40px; justify-content: center; padding: 0 var(--space-3); }
+  .demo-bar .tl-toggle .tl-icon { width: 18px; height: 18px; }
+}

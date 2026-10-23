@@ -1,0 +1,47 @@
+/*
+ * App-wide base styles. Colours, spacing, radii and fonts come from tokens.css only.
+ * Component styles live in src/design-system/components/*.css.
+ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; color-scheme: light; }
+html[data-theme="dark"] { color-scheme: dark; }
+
+html, body, #root { min-height: 100%; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+
+/* Type: Poppins for page and card titles, Inter for everything else, JetBrains Mono for IDs */
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; color: var(--text); margin: 0; }
+p { margin: 0; }
+code, kbd, samp, .mono { font-family: var(--font-mono); }
+
+/* Numbers line up */
+table, .tl-num, .num, input[type="number"], output, time { font-variant-numeric: tabular-nums; }
+
+a { color: var(--primary); }
+a:hover { color: var(--primary-hover); }
+
+img, svg, video { max-width: 100%; }
+img { height: auto; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+/* Visible focus ring everywhere (keyboard only) */
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+::selection { background: var(--primary-soft); color: var(--primary-strong); }
+
+/* Screen-reader-only text */
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Muted helper text */
+.text-muted { color: var(--text-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
+
