@@ -1,7 +1,7 @@
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { StoreProvider } from './store';
 import { DesignPage } from './design-system/DesignPage';
-import { Icon } from './design-system';
+import { Icon, ToastProvider } from './design-system';
 import { DemoBar } from './components/DemoBar';
 import { RolePicker } from './roles/RolePicker';
 import { CountyApp } from './roles/county/CountyApp';
@@ -34,8 +34,9 @@ export function App() {
   return (
     <StoreProvider>
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-        <div className="app-root">
-          <DemoBar />
+        <ToastProvider>
+          <div className="app-root">
+            <DemoBar />
           <div className="app-body">
             <Routes>
               <Route path="/" element={<RolePicker />} />
@@ -47,8 +48,9 @@ export function App() {
               <Route path="/plucker/*" element={<PluckerApp />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            </div>
           </div>
-        </div>
+        </ToastProvider>
       </BrowserRouter>
     </StoreProvider>
   );

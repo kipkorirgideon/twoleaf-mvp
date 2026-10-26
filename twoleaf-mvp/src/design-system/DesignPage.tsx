@@ -10,6 +10,7 @@ import { DataTable, type DataTableColumn } from './components/DataTable';
 import { Footer } from './components/Footer';
 import { Icon, ICON_NAMES } from './components/Icon';
 import { IdTag } from './components/IdTag';
+import { LeafIllustration } from './components/LeafIllustration';
 import { MariakaniMark } from './components/MariakaniMark';
 import { PoweredBy } from './components/PoweredBy';
 import { QualityMeter } from './components/QualityMeter';
@@ -20,6 +21,7 @@ import { StatCard } from './components/StatCard';
 import { TextAreaField } from './components/TextAreaField';
 import { TextField } from './components/TextField';
 import { ThemeToggle } from './components/ThemeToggle';
+import { Toast, ToastProvider, useToast, type ToastTone } from './components/Toast';
 
 /**
  * /design: every design-system component and state, rendered in a light panel
@@ -79,6 +81,26 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
       <h3>{title}</h3>
       {children}
     </section>
+  );
+}
+
+function ToastDemo() {
+  const toast = useToast();
+  const tones: ToastTone[] = ['success', 'info', 'warning', 'danger'];
+  const text: Record<ToastTone, string> = {
+    success: 'Delivery saved',
+    info: '3 deliveries synced',
+    warning: 'Saved offline. It will sync when you are back online.',
+    danger: 'Could not save the delivery. Try again.',
+  };
+  return (
+    <div className="ds-row">
+      {tones.map((t) => (
+        <Button key={t} size="sm" variant="secondary" onClick={() => toast.show(text[t], t)}>
+          Show {t}
+        </Button>
+      ))}
+    </div>
   );
 }
 
@@ -162,6 +184,8 @@ function Gallery({ theme }: { theme: Theme }) {
           <IdTag value="TLF-KCO-FMR-0004817" />
           <IdTag value="TG-043" />
           <IdTag value="TLF-KCO-FAC-000014" copyable={false} />
+          <IdTag value="TLF-KCO-FMR-0004817" copyLabel="Nakili" copiedLabel="Imenakiliwa" />
+          <span className="ds-note">Kiswahili copy labels</span>
         </div>
       </Section>
 
@@ -172,6 +196,9 @@ function Gallery({ theme }: { theme: Theme }) {
           </Card>
           <Card>
             <p>Card with no header.</p>
+          </Card>
+          <Card title="Card title as h2" titleLevel={2} subtitle="titleLevel={2}, same look">
+            <p>Use after a page h1 so no heading level is skipped.</p>
           </Card>
         </div>
       </Section>
@@ -189,8 +216,10 @@ function Gallery({ theme }: { theme: Theme }) {
           <QualityMeter value={66} />
           <QualityMeter value={57.3} label="Kiptere fine leaf" />
           <QualityMeter value={60} />
+          <QualityMeter value={59} label="One point below" />
           <QualityMeter value={0} label="No sample" />
           <QualityMeter value={100} target={70} label="Custom target 70%" />
+          <QualityMeter value={54} label="Ubora wa majani" caption="Alama 6 chini ya lengo la 60%" ariaLabel="Ubora wa majani 54%, lengo 60%" />
         </div>
       </Section>
 
@@ -235,6 +264,25 @@ function Gallery({ theme }: { theme: Theme }) {
         <DataTable columns={COLUMNS} rows={[]} loading caption="Loading" loadingRows={3} />
         <DataTable columns={COLUMNS} rows={[]} caption="Empty" emptyMessage="No deliveries match these filters." />
         <DataTable columns={COLUMNS} rows={[]} caption="Empty (default message)" />
+      </Section>
+
+      <Section title="LeafIllustration">
+        <div className="ds-grid">
+          <LeafIllustration size="md" caption="IMG-TG043-20261023-0412" note="illustration, photos are not stored in this demo" />
+          <LeafIllustration size="sm" label="Picha ya sampuli ya majani (mchoro)" caption="IMG-TG043-20261023-0413" />
+          <LeafIllustration size="sm" />
+        </div>
+      </Section>
+
+      <Section title="Toast (ToastProvider + useToast; static placement here)">
+        <ToastProvider placement="static" dismissLabel={theme === 'light' ? 'Dismiss' : 'Funga'}>
+          <ToastDemo />
+        </ToastProvider>
+        <span className="ds-note">Static examples of each tone:</span>
+        <Toast placement="static" tone="success" message="Delivery saved" />
+        <Toast placement="static" tone="info" message="3 deliveries synced" onDismiss={() => undefined} />
+        <Toast placement="static" tone="warning" message="Saved offline" onDismiss={() => undefined} dismissLabel="Funga" />
+        <Toast placement="static" tone="danger" message="Could not save the delivery" onDismiss={() => undefined} />
       </Section>
 
       <Section title="Skeleton and Spinner">

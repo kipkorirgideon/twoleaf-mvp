@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { Uuid } from '../../types';
+import type { FarmerProfile, Uuid } from '../../types';
 
 /** Base path of the farmer app (App.tsx mounts it at `/farmer/*`). */
 export const FARMER_BASE = '/farmer';
@@ -17,4 +17,11 @@ export function useFarmerSession(): FarmerSession {
   const s = useContext(FarmerSessionContext);
   if (!s) throw new Error('useFarmerSession must be used inside FarmerApp');
   return s;
+}
+
+/** The farmer's profile (memberships, pluckers), loaded once by <FarmerApp> and kept live. */
+export const FarmerProfileContext = createContext<FarmerProfile | undefined>(undefined);
+
+export function useFarmerProfile(): FarmerProfile | undefined {
+  return useContext(FarmerProfileContext);
 }

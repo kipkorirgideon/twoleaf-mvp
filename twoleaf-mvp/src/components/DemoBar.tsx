@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Alert, Button, SelectField, ThemeToggle, twoleafIconUrl } from '../design-system';
+import { Alert, Button, SelectField, ThemeToggle, twoleafIconUrl, useToast } from '../design-system';
 import { useMutation } from '../api';
 import type { Role } from '../types';
 import './DemoBar.css';
@@ -25,8 +25,6 @@ function roleFromPath(pathname: string): Role | '' {
   return match ? match.role : '';
 }
 
-const TOAST_MS = 3500;
-
 /** Always-visible bar at the top of every screen: role switcher, theme and demo reset. */
 export function DemoBar() {
   const location = useLocation();
@@ -34,7 +32,7 @@ export function DemoBar() {
   const current = roleFromPath(location.pathname);
 
   const [confirming, setConfirming] = useState(false);
-  const [toast, setToast] = useState<string | null>(null);
+  const toast = useToast();
   const reset = useMutation((api) => api.resetDemo());
   const resetBtnRef = useRef<HTMLDivElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -49,11 +47,6 @@ export function DemoBar() {
     setConfirming(false);
   }, [location.pathname]);
 
-  useEffect(() => {
-    if (!toast) return undefined;
-    const t = window.setTimeout(() => setToast(null), TOAST_MS);
-    return () => window.clearTimeout(t);
-  }, [toast]);
 
   function onRoleChange(e: ChangeEvent<HTMLSelectElement>): void {
     const opt = ROLE_OPTIONS.find((o) => o.role === e.target.value);
@@ -71,7 +64,7 @@ export function DemoBar() {
     try {
       await reset.run(undefined);
       closeConfirm();
-      setToast('Demo data reset');
+      toast.show('Demo data reset');
     } catch {
       // The error is shown inside the confirmation panel.
     }
@@ -152,9 +145,6 @@ export function DemoBar() {
         </div>
       ) : null}
 
-      <div className="demo-bar-toast" aria-live="polite">
-        {toast ? <Alert tone="success">{toast}</Alert> : null}
-      </div>
     </header>
   );
 }

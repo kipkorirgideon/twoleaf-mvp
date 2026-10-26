@@ -6,10 +6,14 @@ export interface QualityMeterProps {
   /** Defaults to the Tea Board's 60%. */
   target?: number;
   label?: string;
+  /** Replaces the visible caption under the bar (e.g. Kiswahili). Default: "N points below the T% target" / "Meets the T% target". */
+  caption?: string;
+  /** Replaces the meter's accessible name. Default: "<label> V%, target T%". */
+  ariaLabel?: string;
   className?: string;
 }
 
-export function QualityMeter({ value: raw, target: rawTarget, label, className }: QualityMeterProps) {
+export function QualityMeter({ value: raw, target: rawTarget, label, caption, ariaLabel, className }: QualityMeterProps) {
   const value = Math.max(0, Math.min(100, raw || 0));
   const target = rawTarget == null ? 60 : rawTarget;
   const below = value < target;
@@ -28,13 +32,13 @@ export function QualityMeter({ value: raw, target: rawTarget, label, className }
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={value}
-        aria-label={`${name} ${value}%, target ${target}%`}
+        aria-label={ariaLabel ?? `${name} ${value}%, target ${target}%`}
       >
         <div className={cx('tl-meter-fill', below && 'tl-below')} style={{ width: `${value}%` }} />
         <div className="tl-meter-target" style={{ left: `calc(${target}% - 1px)` }} />
       </div>
       <span className="tl-meter-foot">
-        {below ? `${gap} points below the ${target}% target` : `Meets the ${target}% target`}
+        {caption ?? (below ? `${gap} ${gap === 1 ? 'point' : 'points'} below the ${target}% target` : `Meets the ${target}% target`)}
       </span>
     </div>
   );

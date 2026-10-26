@@ -1,9 +1,29 @@
-/* County app styles. Tokens only. */
-
-.cty-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--space-4); }
-.cty-stat-skeleton { display: flex; flex-direction: column; gap: var(--space-3); }
+/* County app styles. Tokens only. Shared layout helpers (web-*) live in src/components/web/web.css. */
 
 .cty-shell-state { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-2) 0; }
 
 .cty-privacy { display: flex; align-items: center; gap: var(--space-2); color: var(--text-muted); font-size: 13px; line-height: 18px; }
 .cty-privacy .tl-icon { width: 16px; height: 16px; flex: none; }
+
+/* Price comparison */
+.cty-prices { display: flex; flex-direction: column; gap: var(--space-3); }
+.cty-price-row { display: grid; grid-template-columns: 120px minmax(0, 1fr) auto; align-items: center; gap: var(--space-3); font-size: 14px; line-height: 20px; }
+.cty-price-track { height: 14px; border-radius: var(--radius-pill); background: var(--surface-sunken); overflow: hidden; }
+.cty-price-fill { height: 100%; border-radius: var(--radius-pill); background: var(--primary); }
+.cty-price-fill-low { background: var(--warning-fg); }
+
+/* Needs attention */
+.cty-attention { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.cty-attention li { display: flex; align-items: flex-start; gap: var(--space-3); padding: var(--space-3) 0; border-bottom: 1px solid var(--border); }
+.cty-attention li:last-child { border-bottom: 0; }
+.cty-attention-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: 14px; line-height: 20px; }
+
+/* Small multiples */
+.cty-multiples { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: var(--space-4); }
+.cty-multiples .tl-meter { min-width: 0; }
+.cty-table-meter .tl-meter { min-width: 150px; }
+
+@media (max-width: 599px) {
+  .cty-price-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .cty-price-track { grid-column: 1 / -1; grid-row: 2; }
+}

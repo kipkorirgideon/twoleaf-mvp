@@ -1,6 +1,106 @@
 /* Factory app styles. Tokens only. */
 
-.fac-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--space-4); }
-.fac-stat-skeleton { display: flex; flex-direction: column; gap: var(--space-3); }
-
+/* ---------- Layout helpers ---------- */
 .fac-shell-state { display: flex; flex-direction: column; gap: var(--space-4); padding: var(--space-2) 0; }
+.fac-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+.fac-section-title { font: 600 13px/18px var(--font-sans); letter-spacing: .4px; text-transform: uppercase; color: var(--text-muted); }
+.fac-inline { display: inline-flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); }
+.fac-strong { font-weight: 600; }
+
+/* Design-system minimum widths would overflow narrow cards */
+.fac-meter-list .tl-meter, .fac-card-link .tl-meter, .fac-drawer .tl-meter { min-width: 0; }
+.fac-form .tl-field, .fac-filters .tl-field { min-width: 0; }
+
+
+/* Meters inside the quality table */
+.fac-quality-table .tl-meter { min-width: 150px; }
+
+/* ---------- Stats ---------- */
+.fac-big-figure { font: 600 32px/40px var(--font-sans); color: var(--text); }
+
+/* ---------- Lists ---------- */
+.fac-meter-list, .fac-simple-list, .fac-linked, .fac-tips { list-style: none; margin: 0; padding: 0; }
+.fac-meter-list { display: flex; flex-direction: column; gap: var(--space-4); }
+.fac-meter-list li { display: flex; flex-direction: column; gap: var(--space-2); }
+.fac-simple-list li { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); flex-wrap: wrap; padding: var(--space-2) 0; border-bottom: 1px solid var(--border); }
+.fac-simple-list li:last-child { border-bottom: 0; }
+.fac-linked { display: flex; flex-direction: column; gap: var(--space-2); }
+.fac-linked li { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-2); }
+.fac-tips { display: flex; flex-direction: column; gap: var(--space-3); }
+.fac-tips li { position: relative; padding-left: var(--space-5); }
+.fac-tips li::before { content: ""; position: absolute; left: 4px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--bud); }
+
+.fac-link-btn { display: inline-flex; align-items: center; gap: var(--space-1); min-height: 32px; padding: 0; border: 0; background: transparent; color: var(--primary); font: 500 14px/20px var(--font-sans); cursor: pointer; text-align: left; }
+.fac-link-btn:hover { color: var(--primary-hover); text-decoration: underline; }
+
+/* ---------- Filters and forms ---------- */
+.fac-filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr)); gap: var(--space-3); align-items: end; }
+.fac-filter-search { grid-column: 1 / -1; }
+.fac-filter-clear { display: flex; align-items: flex-end; min-height: 44px; }
+.fac-form { display: flex; flex-direction: column; gap: var(--space-4); }
+.fac-form-card { max-width: 640px; }
+.fac-form-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; }
+.fac-check { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 44px; font: 500 14px/20px var(--font-sans); cursor: pointer; }
+.fac-check input { width: 18px; height: 18px; accent-color: var(--primary); }
+.fac-quote { margin: 0; padding: var(--space-3) var(--space-4); border-left: 3px solid var(--primary); background: var(--surface-muted); border-radius: 0 var(--radius-md) var(--radius-md) 0; font-size: 15px; line-height: 22px; color: var(--text); }
+
+/* ---------- Definition list ---------- */
+.fac-dl { display: flex; flex-direction: column; margin: 0; }
+.fac-dl-row { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: var(--space-3); padding: var(--space-2) 0; border-bottom: 1px solid var(--border); }
+.fac-dl-row:last-child { border-bottom: 0; }
+.fac-dl dt { color: var(--text-muted); font-size: 13px; line-height: 20px; }
+.fac-dl dd { margin: 0; min-width: 0; overflow-wrap: anywhere; font-size: 14px; line-height: 20px; }
+.fac-dl-sub { display: block; color: var(--text-muted); font-size: 13px; }
+
+/* ---------- Cards that link ---------- */
+.fac-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: var(--space-4); }
+.fac-card-link {
+  display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-5); background: var(--surface); color: var(--text); text-decoration: none;
+  border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+  transition: border-color .15s, box-shadow .15s;
+}
+.fac-card-link:hover { color: var(--text); border-color: var(--primary); box-shadow: var(--shadow-md); }
+.fac-card-link-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-2); flex-wrap: wrap; }
+.fac-card-link-head > span:first-child { display: flex; flex-direction: column; gap: 2px; }
+.fac-card-link-title { font: 600 17px/24px var(--font-display); }
+.fac-kv { display: flex; justify-content: space-between; gap: var(--space-3); font-size: 14px; line-height: 20px; }
+.fac-kv > span { color: var(--text-muted); }
+
+/* ---------- Drawer ---------- */
+.fac-drawer-backdrop { position: fixed; inset: 0; z-index: 55; background: color-mix(in srgb, var(--text) 45%, transparent); }
+.fac-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; z-index: 56;
+  width: min(560px, 100vw); display: flex; flex-direction: column;
+  background: var(--surface); border-left: 1px solid var(--border); box-shadow: var(--shadow-md);
+}
+.fac-drawer-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-3); padding: var(--space-4) var(--space-5); border-bottom: 1px solid var(--border); }
+.fac-drawer-titles { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.fac-drawer-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: var(--space-5); }
+.fac-drawer-stack { display: flex; flex-direction: column; gap: var(--space-4); }
+.fac-icon-btn { display: grid; place-items: center; width: 44px; height: 44px; flex: none; border: 0; border-radius: var(--radius-md); background: transparent; color: var(--text); cursor: pointer; }
+.fac-icon-btn:hover { background: var(--surface-muted); }
+
+
+/* ---------- Audit ---------- */
+.fac-progress { height: 10px; border-radius: var(--radius-pill); background: var(--surface-sunken); overflow: hidden; }
+.fac-progress-fill { height: 100%; background: var(--primary); transition: width .12s linear; }
+.fac-progress-fail { background: var(--danger-fg); }
+.fac-demo-box { border-style: dashed; border-color: var(--warning-fg); }
+
+/* ---------- Settings ---------- */
+.fac-logo-row { display: flex; gap: var(--space-5); align-items: flex-start; flex-wrap: wrap; }
+.fac-logo-row > .web-stack { flex: 1 1 260px; }
+.fac-logo-preview {
+  display: grid; place-items: center; width: 112px; height: 112px; flex: none;
+  border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--surface-muted); overflow: hidden;
+  color: var(--primary-strong); font: 600 32px/1 var(--font-display);
+}
+.fac-logo-preview img { width: 100%; height: 100%; object-fit: contain; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 599px) {
+  .fac-dl-row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .fac-drawer-head, .fac-drawer-body { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .fac-card-link { padding: var(--space-4); }
+}

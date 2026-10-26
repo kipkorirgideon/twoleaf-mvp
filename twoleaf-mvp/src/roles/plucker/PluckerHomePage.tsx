@@ -1,11 +1,12 @@
 import { useQuery } from '../../api';
-import { Alert, StatCard } from '../../design-system';
+import { Alert, Card, StatCard } from '../../design-system';
 import { PhoneError, PhoneLoading, PhoneScreen } from '../../layouts/PhoneLayout';
 import { formatNumber } from '../../lib/format';
 import { useT } from '../../lib/i18n';
+import { FineLeafMeter } from '../farmer/FineLeafMeter';
 import { usePluckerSession } from './session';
 
-/** Phase 3 placeholder: proves the data wiring. The full Home is built in phase 6. */
+/** Plucker Home: kilos this week and month, average fine leaf, farmers worked for, pay note. */
 export function PluckerHomePage() {
   const t = useT();
   const { pluckerUuid } = usePluckerSession();
@@ -17,13 +18,19 @@ export function PluckerHomePage() {
       {q.error && !home ? <PhoneError message={t('shell.error')} retryLabel={t('shell.tryAgain')} onRetry={q.reload} /> : null}
       {home ? (
         <>
-          <h2 className="h3">{t('greeting', { name: home.plucker.name.split(' ')[0] ?? home.plucker.name })}</h2>
+          <h2 className="fm-greeting">{t('greeting', { name: home.plucker.name.split(' ')[0] ?? home.plucker.name })}</h2>
           <div className="phone-stats">
             <StatCard label={t('common.kilosThisWeek')} value={formatNumber(home.kgThisWeek, 1)} unit={t('common.kg')} />
             <StatCard label={t('common.kilosThisMonth')} value={formatNumber(home.kgThisMonth, 1)} unit={t('common.kg')} />
+            <StatCard label={t('common.farmersWorkedFor')} value={formatNumber(home.farmerCount)} />
+            <StatCard label={t('plucker.sessionsThisMonth')} value={formatNumber(home.sessionsThisMonth)} />
           </div>
+          {home.avgFineLeafPct !== null ? (
+            <Card>
+              <FineLeafMeter value={home.avgFineLeafPct} target={home.target} label={t('common.averageFineLeafMonth')} />
+            </Card>
+          ) : null}
           <Alert tone="info">{t('plucker.payNote')}</Alert>
-          <p className="phone-muted">{t('shell.comingSoon')}</p>
         </>
       ) : null}
     </PhoneScreen>

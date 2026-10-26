@@ -41,6 +41,11 @@ export function formatKshPerKg(centsPerKg: number): string {
   return `${formatKsh(centsPerKg)}/kg`;
 }
 
+/** Unrounded rate with a chosen precision: 1709.99 cents, 4 decimals → "KSh 17.0999 per kg". */
+export function formatKshPerKgExact(cents: number, decimals: number): string {
+  return `KSh ${formatNumber(cents / 100, Math.max(0, Math.floor(decimals)))} per kg`;
+}
+
 /** Large amounts in short form: "KSh 271.4 M". */
 export function formatKshCompact(cents: number): string {
   const ksh = cents / 100;

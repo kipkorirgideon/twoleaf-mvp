@@ -4,7 +4,20 @@ import { Spinner, type SidebarGroup } from '../../design-system';
 import { useQuery } from '../../api';
 import { LoadError, PageHeader, WebLayout } from '../../layouts/WebLayout';
 import { FactoryShellContext, type FactoryShell } from './FactoryContext';
-import { FactoryPlaceholder } from './pages/FactoryPlaceholder';
+import { DeliveryDrawer } from './components/DeliveryDrawer';
+import { AuditPage } from './pages/AuditPage';
+import { BonusPage } from './pages/BonusPage';
+import { CentreDetailPage, CentresPage } from './pages/CentresPage';
+import { DashboardPage } from './pages/DashboardPage';
+import { DeliveriesPage } from './pages/DeliveriesPage';
+import { DisputeDetailPage, DisputesPage } from './pages/DisputesPage';
+import { FarmerDetailPage } from './pages/FarmerDetailPage';
+import { FarmersPage } from './pages/FarmersPage';
+import { PluckerDetailPage, PluckersPage } from './pages/PluckersPage';
+import { QualityPage } from './pages/QualityPage';
+import { RegisterFarmerPage } from './pages/RegisterFarmerPage';
+import { SettingsPage } from './pages/SettingsPage';
+import '../../components/web/web.css';
 import './factory.css';
 
 const BASE = '/factory';
@@ -74,110 +87,26 @@ export function FactoryApp() {
   } else {
     content = (
       <FactoryShellContext.Provider value={shell}>
-        <Routes>
-          <Route
-            index
-            element={
-              <FactoryPlaceholder
-                title="Dashboard"
-                subtitle="Today at Tegat Tea Factory"
-                plan="Kilos today and this month, active farmers, fine leaf, open disputes, offline centre alerts, quality by centre and the last 10 deliveries."
-              />
-            }
-          />
-          <Route
-            path="deliveries/*"
-            element={
-              <FactoryPlaceholder
-                title="Deliveries"
-                subtitle="Every delivery at Tegat's buying centres"
-                plan="Filters by centre, status, dates and search, the deliveries table and the delivery drawer with corrections."
-              />
-            }
-          />
-          <Route
-            path="farmers/*"
-            element={
-              <FactoryPlaceholder
-                title="Farmers"
-                subtitle="Farmers registered at Tegat's buying centres"
-                plan="Farmer search and table, Register farmer with a suggested farmer number, and the farmer detail page."
-              />
-            }
-          />
-          <Route
-            path="pluckers/*"
-            element={
-              <FactoryPlaceholder
-                title="Pluckers"
-                subtitle="Pluckers recorded on Tegat deliveries"
-                plan="Pluckers with farmers worked for, sessions, kilos and fine leaf this month, plus a detail page with sessions."
-              />
-            }
-          />
-          <Route
-            path="centres/*"
-            element={
-              <FactoryPlaceholder
-                title="Buying centres"
-                subtitle="Tegat's six buying centres"
-                plan="A card per centre with clerk, farmers, kilos, fine leaf, connectivity and last sync, and a centre detail page."
-              />
-            }
-          />
-          <Route
-            path="quality/*"
-            element={
-              <FactoryPlaceholder
-                title="Quality"
-                subtitle="Fine leaf at the centre and at factory intake"
-                plan="Centre score vs intake score and the transport gap per centre, top and bottom 5 farmers, and plucking tips."
-              />
-            }
-          />
-          <Route
-            path="bonus/*"
-            element={
-              <FactoryPlaceholder
-                title="Bonus"
-                subtitle="Second payment for FY 2025/26"
-                plan="Formula v2026.1 with every input and computed line, Recalculate, and a farmer bonus lookup."
-              />
-            }
-          />
-          <Route
-            path="disputes/*"
-            element={
-              <FactoryPlaceholder
-                title="Disputes"
-                subtitle="Problems reported by farmers"
-                plan="The dispute queue with deadlines, and dispute detail with Uphold (with a correction) or Reject."
-              />
-            }
-          />
-          <Route
-            path="audit/*"
-            element={
-              <FactoryPlaceholder
-                title="Audit"
-                subtitle="Sealed days, chain verification and audit packs"
-                plan="Verify chain, the demo-only tampering controls, sealed days, audit packs and the access log."
-              />
-            }
-          />
-          <Route
-            path="settings/*"
-            element={
-              <FactoryPlaceholder
-                title="Settings"
-                subtitle="Factory logo, profile, users and roles"
-                plan="Factory logo upload and removal, the factory profile, and users and roles."
-              />
-            }
-          />
-          <Route path="*" element={<FactoryNotFound />} />
-        </Routes>
-      </FactoryShellContext.Provider>
+                  <Routes>
+            <Route index element={<DashboardPage />} />
+            <Route path="deliveries" element={<DeliveriesPage />} />
+            <Route path="farmers" element={<FarmersPage />} />
+            <Route path="farmers/new" element={<RegisterFarmerPage />} />
+            <Route path="farmers/:farmerUuid" element={<FarmerDetailPage />} />
+            <Route path="pluckers" element={<PluckersPage />} />
+            <Route path="pluckers/:pluckerUuid" element={<PluckerDetailPage />} />
+            <Route path="centres" element={<CentresPage />} />
+            <Route path="centres/:centreUuid" element={<CentreDetailPage />} />
+            <Route path="quality" element={<QualityPage />} />
+            <Route path="bonus" element={<BonusPage />} />
+            <Route path="disputes" element={<DisputesPage />} />
+            <Route path="disputes/:disputeUuid" element={<DisputeDetailPage />} />
+            <Route path="audit" element={<AuditPage />} />
+            <Route path="settings" element={<SettingsPage />} />
+            <Route path="*" element={<FactoryNotFound />} />
+          </Routes>
+          <DeliveryDrawer />
+              </FactoryShellContext.Provider>
     );
   }
 

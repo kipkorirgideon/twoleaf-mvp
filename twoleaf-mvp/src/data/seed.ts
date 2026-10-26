@@ -754,7 +754,6 @@ export function createSeedState(): AppState {
     reversalOf: miskeyed.uuid,
     correctionOf: null,
     correction: correctionNote,
-    clerkUuid: unitManager.uuid,
   };
   const corrected: Delivery = {
     ...miskeyed,
@@ -766,7 +765,6 @@ export function createSeedState(): AppState {
     reversalOf: null,
     correctionOf: miskeyed.uuid,
     correction: correctionNote,
-    clerkUuid: unitManager.uuid,
   };
   miskeyed.status = 'corrected';
   deliveries.push(reversal, corrected);

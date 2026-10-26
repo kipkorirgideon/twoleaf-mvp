@@ -74,6 +74,7 @@ import {
   ApiError,
   type AuditActor,
   type CorrectDeliveryRequest,
+  type CountyIdentity,
   type CorrectDeliveryResponse,
   type CreateDeliveryRequest,
   type CreateDeliveryResponse,
@@ -193,6 +194,15 @@ export function createApi(store: StoreHandle) {
     /* ================================================================ */
     /* County (aggregates only)                                         */
     /* ================================================================ */
+
+    // GET /api/v1/counties/{uuid}
+    /** GET /api/v1/counties/{uuid} — county identity for the sidebar. */
+    async getCounty(countyUuid: Uuid): Promise<CountyIdentity> {
+      await wait();
+      const c = state().county;
+      if (c.uuid !== countyUuid) throw new ApiError('not_found', 'County not found.');
+      return { uuid: c.uuid, readableId: c.readableId, name: c.name, officialCode: c.officialCode };
+    },
 
     /** GET /api/v1/counties/{uuid}/overview */
     async getCountyOverview(countyUuid: Uuid): Promise<CountyOverview> {

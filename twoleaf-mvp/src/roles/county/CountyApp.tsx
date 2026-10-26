@@ -4,7 +4,12 @@ import { Spinner, type SidebarGroup } from '../../design-system';
 import { useQuery } from '../../api';
 import { LoadError, PageHeader, WebLayout } from '../../layouts/WebLayout';
 import { CountyShellContext, type CountyShell } from './CountyContext';
-import { CountyPlaceholder } from './pages/CountyPlaceholder';
+import { CountyAuditPage } from './pages/CountyAuditPage';
+import { CountyDisputesPage } from './pages/CountyDisputesPage';
+import { CountyFactoriesPage, CountyFactorySummaryPage } from './pages/CountyFactoriesPage';
+import { CountyOverviewPage } from './pages/CountyOverviewPage';
+import { CountyQualityPage } from './pages/CountyQualityPage';
+import '../../components/web/web.css';
 import './county.css';
 
 const BASE = '/county';
@@ -36,13 +41,12 @@ function CountyNotFound() {
 export function CountyApp() {
   const sessionQ = useQuery((api) => api.getSession('county'), [], { live: false });
   const countyUuid = sessionQ.data?.countyUuid ?? null;
-  // The county's name and codes for the sidebar (no farmer-level data in this response).
   const countyQ = useQuery(
-    (api) => (countyUuid ? api.getCountyOverview(countyUuid) : Promise.reject(new Error('No county in this session.'))),
+    (api) => (countyUuid ? api.getCounty(countyUuid) : Promise.reject(new Error('No county in this session.'))),
     [countyUuid],
     { enabled: countyUuid !== null, live: false },
   );
-  const county = countyQ.data?.county;
+  const county = countyQ.data;
 
   const shell = useMemo<CountyShell | null>(
     () => (sessionQ.data && countyUuid ? { session: sessionQ.data, countyUuid } : null),
@@ -65,60 +69,16 @@ export function CountyApp() {
   } else {
     content = (
       <CountyShellContext.Provider value={shell}>
-        <Routes>
-          <Route
-            index
-            element={
-              <CountyPlaceholder
-                title="Overview"
-                subtitle="All factories in Kericho County, in aggregate"
-                plan="Stat cards, fine leaf by factory against the 60% target, West vs East of Rift prices, and what needs attention."
-              />
-            }
-          />
-          <Route
-            path="factories/*"
-            element={
-              <CountyPlaceholder
-                title="Factories"
-                subtitle="Factory-level figures for the six factories"
-                plan="The factories table and a summary per factory with a 6-month kilos trend and quality by buying centre."
-              />
-            }
-          />
-          <Route
-            path="quality/*"
-            element={
-              <CountyPlaceholder
-                title="Quality"
-                subtitle="Fine leaf by factory over the last 6 months"
-                plan="Fine leaf per factory over 6 months and the centre vs intake gap per factory."
-              />
-            }
-          />
-          <Route
-            path="disputes/*"
-            element={
-              <CountyPlaceholder
-                title="Disputes"
-                subtitle="Dispute counts and rates by factory"
-                plan="Counts and rates per factory, average days to resolve and the oldest open dispute."
-              />
-            }
-          />
-          <Route
-            path="audit/*"
-            element={
-              <CountyPlaceholder
-                title="Audit & reports"
-                subtitle="Chain status, audit packs and the access log"
-                plan="Chain status per factory, prepared audit packs, Prepare audit pack, and the access log."
-              />
-            }
-          />
-          <Route path="*" element={<CountyNotFound />} />
-        </Routes>
-      </CountyShellContext.Provider>
+                  <Routes>
+            <Route index element={<CountyOverviewPage />} />
+            <Route path="factories" element={<CountyFactoriesPage />} />
+            <Route path="factories/:factoryUuid" element={<CountyFactorySummaryPage />} />
+            <Route path="quality" element={<CountyQualityPage />} />
+            <Route path="disputes" element={<CountyDisputesPage />} />
+            <Route path="audit" element={<CountyAuditPage />} />
+            <Route path="*" element={<CountyNotFound />} />
+          </Routes>
+              </CountyShellContext.Provider>
     );
   }
 

@@ -1,0 +1,34 @@
+/* Layout helpers shared by the county and factory web apps. Tokens only. */
+
+.web-stack { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+.web-stack-sm { display: flex; flex-direction: column; gap: var(--space-2); min-width: 0; }
+.web-section { display: flex; flex-direction: column; gap: var(--space-3); min-width: 0; }
+.web-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); align-items: start; }
+.web-grid-2 > * { min-width: 0; }
+.web-mt { margin-top: var(--space-3); }
+.web-nowrap { white-space: nowrap; }
+.web-cell-2 { display: flex; flex-direction: column; gap: 2px; }
+
+/* Design-system minimum widths would overflow narrow cards */
+.web-grid-2 .tl-meter, .web-stack .tl-meter, .web-stat-meter .tl-meter { min-width: 0; }
+.web-inline-form .tl-field { min-width: 0; }
+
+/* Card header actions stay on one line; the header wraps on narrow screens */
+.wl-content .tl-card-head { flex-wrap: wrap; }
+.tl-card-head > .tl-btn, .tl-card-head > a { flex: none; white-space: nowrap; }
+
+/* Stats */
+.web-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: var(--space-4); }
+.web-stats .tl-stat { min-width: 0; }
+.web-stat-skeleton { display: flex; flex-direction: column; gap: var(--space-3); }
+
+/* Inline form row (select + button) */
+.web-inline-form { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-3); margin-bottom: var(--space-3); }
+.web-inline-form .tl-field { flex: 1 1 200px; max-width: 280px; }
+
+@media (max-width: 1023px) {
+  .web-grid-2 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Table captions name each table for screen readers; the visible section heading already says it */
+.wl-content .tl-table-caption { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

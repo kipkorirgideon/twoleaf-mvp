@@ -16,10 +16,10 @@ You are the **lead**. You plan, delegate and integrate. You do not write feature
 
 | Agent | Owns (may edit) | Phases |
 |---|---|---|
-| `design-system-engineer` | `src/design-system/**`, `index.html`, `src/main.tsx`, `src/app.css` | 1 |
+| `design-system-engineer` | `src/design-system/**` (including shared components used by both web and phone apps, such as `LeafIllustration` and `Toast`), `index.html`, `src/main.tsx`, `src/app.css` | 1, 9 |
 | `data-engineer` | `src/types/**`, `src/lib/**` (except `i18n.ts`), `src/data/**`, `src/store/**`, `src/api/**` | 2 |
-| `web-app-engineer` | `src/App.tsx`, `src/roles/RolePicker.tsx`, `src/components/DemoBar.tsx`, `src/layouts/WebLayout.tsx`, `src/roles/county/**`, `src/roles/factory/**` | 3, 4, 7 |
-| `mobile-app-engineer` | `src/layouts/PhoneLayout.tsx`, `src/roles/clerk/**`, `src/roles/farmer/**`, `src/roles/plucker/**`, `src/lib/i18n.ts` | 5, 6 |
+| `web-app-engineer` | `src/App.tsx`, `src/AppShell.css`, `src/roles/RolePicker.*`, `src/components/DemoBar.*`, `src/components/web/**` (components shared by county and factory), `src/layouts/WebLayout.*`, `src/roles/county/**`, `src/roles/factory/**` | 3, 4, 7, 9 |
+| `mobile-app-engineer` | `src/layouts/PhoneLayout.*`, `src/roles/clerk/**`, `src/roles/farmer/**`, `src/roles/plucker/**`, `src/lib/i18n.ts` | 5, 6, 9 |
 | `qa-reviewer` | Nothing (read-only, may run commands) | 8, 9 and after every phase |
 
 ### How to run the build

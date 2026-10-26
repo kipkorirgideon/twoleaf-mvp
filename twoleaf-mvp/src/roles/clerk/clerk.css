@@ -1,0 +1,119 @@
+/* Clerk app screens. Tokens only; touch targets 44px or more. */
+
+/* Centre header card */
+.clerk-centre { display: flex; flex-direction: column; gap: var(--space-3); }
+.clerk-centre-name { font: 600 20px/28px var(--font-display); }
+.clerk-centre-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+
+/* Online / Offline demo switch */
+.clerk-switch-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding-top: var(--space-3); border-top: 1px solid var(--border); }
+.clerk-switch-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.clerk-switch-label { font: 600 15px/20px var(--font-sans); }
+.clerk-switch {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  min-height: 44px; padding: 0 var(--space-3) 0 var(--space-2);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-pill);
+  background: var(--surface); color: var(--text); cursor: pointer;
+  font: 600 14px/20px var(--font-sans); flex: none;
+}
+.clerk-switch:disabled { opacity: .6; cursor: progress; }
+.clerk-switch-track { position: relative; width: 44px; height: 26px; border-radius: var(--radius-pill); background: var(--surface-sunken); border: 1px solid var(--border-strong); transition: background-color .15s; }
+.clerk-switch-thumb { position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--text-muted); transition: transform .15s, background-color .15s; }
+.clerk-switch[aria-checked="true"] .clerk-switch-track { background: var(--primary); border-color: var(--primary); }
+.clerk-switch[aria-checked="true"] .clerk-switch-thumb { transform: translateX(18px); background: var(--on-primary); }
+
+/* Big primary action */
+.clerk-big-btn { min-height: 56px; font-size: 17px; }
+
+/* Progress indicator for the Record flow */
+.clerk-progress { display: flex; flex-direction: column; gap: var(--space-2); }
+.clerk-progress-text { font: 500 13px/18px var(--font-sans); color: var(--text-muted); }
+.clerk-progress-text strong { color: var(--text); font-weight: 600; }
+.clerk-progress ol { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+.clerk-progress li { height: 6px; border-radius: var(--radius-pill); background: var(--surface-sunken); }
+.clerk-progress li[data-state="done"] { background: var(--primary); }
+.clerk-progress li[data-state="current"] { background: var(--bud); }
+
+/* Section inside a step */
+.clerk-step { display: flex; flex-direction: column; gap: var(--space-4); }
+.clerk-lead { font-size: 15px; line-height: 22px; color: var(--text); }
+.clerk-actions { display: flex; flex-direction: column; gap: var(--space-2); }
+
+/* Farmer confirm card */
+.clerk-farmer { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.clerk-farmer-name { font: 600 18px/24px var(--font-display); }
+.clerk-ref { font: 500 15px/20px var(--font-mono); color: var(--text); white-space: nowrap; }
+
+/* Radio options (plucker) */
+.clerk-options { display: flex; flex-direction: column; gap: var(--space-2); margin: 0; padding: 0; border: 0; min-width: 0; }
+.clerk-options legend { padding: 0; margin-bottom: var(--space-2); font: 500 13px/16px var(--font-sans); color: var(--text); }
+.clerk-option {
+  display: flex; align-items: center; gap: var(--space-3);
+  min-height: 56px; padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-strong); border-radius: var(--radius-md);
+  background: var(--surface); cursor: pointer;
+}
+.clerk-option:hover { background: var(--surface-muted); }
+.clerk-option:has(input:checked) { border-color: var(--primary); background: var(--primary-soft); }
+.clerk-option:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+.clerk-option input { width: 20px; height: 20px; margin: 0; accent-color: var(--primary); flex: none; }
+.clerk-option-text { display: flex; flex-direction: column; min-width: 0; }
+.clerk-option-name { font: 500 15px/20px var(--font-sans); }
+.clerk-option-sub { display: flex; margin-top: 2px; }
+
+/* Scale reading */
+.clerk-reading { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); padding: var(--space-5) var(--space-4); border-radius: var(--radius-lg); background: var(--surface-sunken); text-align: center; }
+.clerk-reading-value { font: 600 44px/52px var(--font-sans); font-variant-numeric: tabular-nums; color: var(--text); }
+.clerk-reading-unit { font-size: 20px; font-weight: 500; color: var(--text-muted); margin-left: var(--space-1); }
+.clerk-reading-meta { font: 500 12px/16px var(--font-mono); color: var(--text-muted); }
+
+/* Score adjust stepper */
+.clerk-stepper { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.clerk-stepper-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; flex: none;
+  border: 1px solid var(--border-strong); border-radius: var(--radius-md);
+  background: var(--surface); color: var(--text); cursor: pointer;
+  font: 600 24px/1 var(--font-sans);
+}
+.clerk-stepper-btn:hover:not(:disabled) { background: var(--surface-muted); }
+.clerk-stepper-btn:disabled { opacity: .4; cursor: not-allowed; }
+.clerk-stepper-value { display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+.clerk-stepper-value strong { font: 600 32px/40px var(--font-sans); font-variant-numeric: tabular-nums; }
+.clerk-stepper-value span { font-size: 13px; line-height: 18px; color: var(--text-muted); }
+
+/* Summary / receipt lists */
+.clerk-summary { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-2) var(--space-4); margin: 0; }
+.clerk-summary dt { font-size: 13px; line-height: 20px; color: var(--text-muted); }
+.clerk-summary dd { margin: 0; font-size: 15px; line-height: 20px; font-variant-numeric: tabular-nums; text-align: right; overflow-wrap: anywhere; }
+
+/* Receipt */
+.clerk-receipt { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); text-align: center; }
+.clerk-receipt-icon { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%; background: var(--success-bg); color: var(--success-fg); }
+.clerk-receipt-icon.is-pending { background: var(--warning-bg); color: var(--warning-fg); }
+.clerk-receipt-icon .tl-icon { width: 28px; height: 28px; }
+
+/* Delivery list (Today, Sync) */
+.clerk-list { display: flex; flex-direction: column; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.clerk-item {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: var(--space-1) var(--space-3);
+  min-height: 64px; padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  background: var(--surface); color: var(--text); text-decoration: none;
+}
+a.clerk-item:hover { background: var(--surface-muted); color: var(--text); }
+.clerk-item-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.clerk-item-name { font: 500 15px/20px var(--font-sans); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.clerk-item-sub { font-size: 13px; line-height: 18px; color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.clerk-item-side { display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-1); }
+.clerk-item-kg { font: 600 15px/20px var(--font-sans); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.clerk-item-id { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); min-width: 0; color: var(--text-muted); }
+
+/* Empty state */
+.clerk-empty { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); padding: var(--space-6) var(--space-4); text-align: center; color: var(--text-muted); }
+.clerk-empty .tl-icon { width: 32px; height: 32px; color: var(--primary); }
+.clerk-empty strong { color: var(--text); font: 600 16px/22px var(--font-display); }
+.clerk-field-error { font-size: 13px; line-height: 18px; color: var(--danger-fg); }
+
+/* Cards with several blocks inside */
+.clerk-card-stack { display: flex; flex-direction: column; gap: var(--space-3); }

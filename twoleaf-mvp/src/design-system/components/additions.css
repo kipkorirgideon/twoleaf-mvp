@@ -46,3 +46,30 @@ a.tl-btn[aria-disabled="true"] { opacity: .5; pointer-events: none; }
 
 /* IDs never wrap mid-code */
 .tl-id { white-space: nowrap; }
+
+/* LeafIllustration (leaf sample photo placeholder) */
+.tl-leaf { margin: 0; display: flex; flex-direction: column; gap: var(--space-1); width: 100%; }
+.tl-leaf-sm { max-width: 240px; }
+.tl-leaf-md { max-width: 360px; }
+.tl-leaf svg { display: block; width: 100%; height: auto; border-radius: var(--radius-md); }
+.tl-leaf .tl-leaf-bg { fill: var(--surface-sunken); }
+.tl-leaf .tl-leaf-tray { fill: var(--surface); stroke: var(--border); stroke-width: 1.5; }
+.tl-leaf .tl-leaf-stem { fill: none; stroke: var(--primary-strong); stroke-width: 2.4; stroke-linecap: round; }
+.tl-leaf .tl-leaf-fine { fill: var(--primary); }
+.tl-leaf .tl-leaf-bud { fill: var(--bud); }
+.tl-leaf .tl-leaf-coarse { fill: var(--primary-strong); opacity: .85; }
+.tl-leaf .tl-leaf-rib { fill: none; stroke: var(--surface); stroke-width: 1; stroke-linecap: round; opacity: .7; }
+.tl-leaf-caption { font-size: 12px; line-height: 16px; color: var(--text-muted); overflow-wrap: anywhere; }
+.tl-leaf-ref { font: 500 12px/16px var(--font-mono); }
+
+/* Toast */
+.tl-toast-region { z-index: 60; pointer-events: none; }
+.tl-toast-bottom { position: fixed; left: 50%; bottom: var(--space-5); transform: translateX(-50%); width: max-content; max-width: calc(100vw - 2 * var(--space-4)); }
+.tl-toast-inside { position: absolute; left: var(--space-3); right: var(--space-3); bottom: 72px; z-index: 5; }
+.tl-toast-static { position: relative; }
+.tl-toast { align-items: flex-start; box-shadow: var(--shadow-md); border: 1px solid var(--border); pointer-events: auto; }
+.tl-toast-msg { flex: 1; min-width: 0; }
+.tl-toast-close { position: relative; display: inline-flex; align-items: center; justify-content: center; flex: none; width: 28px; height: 28px; margin: -4px -6px -4px 0; padding: 0; border: 0; border-radius: var(--radius-sm); background: transparent; color: inherit; cursor: pointer; }
+.tl-toast-close::after { content: ""; position: absolute; inset: -8px; }
+.tl-toast-close:hover { background: var(--surface); }
+.tl-toast-close .tl-icon { width: 16px; height: 16px; }

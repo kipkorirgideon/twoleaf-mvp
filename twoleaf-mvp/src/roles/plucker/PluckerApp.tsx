@@ -5,6 +5,7 @@
 import { useMemo } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useQuery } from '../../api';
+import { ToastProvider, ToastRegion } from '../../design-system';
 import { PhoneError, PhoneLayout, PhoneLoading, PhoneScreen, type PhoneSidePanel, type PhoneTab } from '../../layouts/PhoneLayout';
 import { useT } from '../../lib/i18n';
 import { PluckerHomePage } from './PluckerHomePage';
@@ -12,6 +13,7 @@ import { PluckerMePage } from './PluckerMePage';
 import { PluckerSessionsPage } from './PluckerSessionsPage';
 import { PluckerTipsPage } from './PluckerTipsPage';
 import { PLUCKER_BASE, PluckerSessionContext, type PluckerSession } from './session';
+import '../farmer/farmer.css';
 
 // The side panel sits outside the phone and is part of the English demo frame.
 const SIDE: PhoneSidePanel = {
@@ -39,28 +41,32 @@ export function PluckerApp() {
   ];
 
   return (
-    <PhoneLayout appLabel={t('app.plucker')} tabs={tabs} side={SIDE} langToggle>
-      {session ? (
-        <PluckerSessionContext.Provider value={session}>
-          <Routes>
-            <Route index element={<PluckerHomePage />} />
-            <Route path="sessions" element={<PluckerSessionsPage />} />
-            <Route path="tips" element={<PluckerTipsPage />} />
-            <Route path="me" element={<PluckerMePage />} />
-            <Route path="*" element={<Navigate to={PLUCKER_BASE} replace />} />
-          </Routes>
-        </PluckerSessionContext.Provider>
-      ) : (
-        <PhoneScreen title={t('app.plucker')}>
-          {sessionQ.error ? (
-            <PhoneError message={t('shell.error')} retryLabel={t('shell.tryAgain')} onRetry={sessionQ.reload} />
-          ) : sessionQ.loading ? (
-            <PhoneLoading label={t('shell.loading')} />
-          ) : (
-            <PhoneError message={t('shell.error')} />
-          )}
-        </PhoneScreen>
-      )}
-    </PhoneLayout>
+    <ToastProvider region={false} dismissLabel={t('shell.dismiss')}>
+      <PhoneLayout appLabel={t('app.plucker')} tabs={tabs} side={SIDE} langToggle>
+        {session ? (
+          <PluckerSessionContext.Provider value={session}>
+            <Routes>
+              <Route index element={<PluckerHomePage />} />
+              <Route path="sessions" element={<PluckerSessionsPage />} />
+              <Route path="tips" element={<PluckerTipsPage />} />
+              <Route path="me" element={<PluckerMePage />} />
+              <Route path="*" element={<Navigate to={PLUCKER_BASE} replace />} />
+            </Routes>
+          </PluckerSessionContext.Provider>
+        ) : (
+          <PhoneScreen title={t('app.plucker')}>
+            {sessionQ.error ? (
+              <PhoneError message={t('shell.error')} retryLabel={t('shell.tryAgain')} onRetry={sessionQ.reload} />
+            ) : sessionQ.loading ? (
+              <PhoneLoading label={t('shell.loading')} />
+            ) : (
+              <PhoneError message={t('shell.error')} />
+            )}
+          </PhoneScreen>
+        )}
+        {/* Toasts sit inside the phone frame, above the tab bar. */}
+        <ToastRegion placement="inside" />
+      </PhoneLayout>
+    </ToastProvider>
   );
 }

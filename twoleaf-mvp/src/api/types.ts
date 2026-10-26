@@ -3,6 +3,7 @@
  * Django REST serializers one to one. Responses reuse the view models in `src/types`.
  */
 import type {
+  County,
   DeliveryDetail,
   DeliveryFilters,
   DeliveryRow,
@@ -15,6 +16,9 @@ import type {
   AccessAction,
   Uuid,
 } from '../types';
+
+/** GET /api/v1/counties/{uuid} response. */
+export type CountyIdentity = Pick<County, 'uuid' | 'readableId' | 'name' | 'officialCode'>;
 
 export type ApiErrorCode = 'not_found' | 'validation' | 'conflict' | 'offline' | 'forbidden';
 

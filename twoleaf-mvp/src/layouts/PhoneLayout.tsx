@@ -64,6 +64,15 @@ export function PhoneLayout({ appLabel, tabs, side, langToggle = false, children
   const [lang] = useLang();
   return (
     <div className="phone-stage">
+
+      <main className="phone-frame" aria-label={appLabel} lang={langToggle ? lang : 'en'}>
+        <PhoneLayoutContext.Provider value={{ langToggle }}>
+          <div className="phone-main">{children}</div>
+        </PhoneLayoutContext.Provider>
+        <PhoneTabBar tabs={tabs} label={langToggle ? undefined : 'Main menu'} />
+      </main>
+
+      {/* After the phone in the DOM so the screen's h1 comes first; CSS shows it on the left. */}
       <aside className="phone-side" aria-label="About this role">
         <img className="phone-side-icon" src={twoleafIconUrl} alt="" width={40} height={40} />
         <p className="phone-side-role">{side.role}</p>
@@ -80,13 +89,6 @@ export function PhoneLayout({ appLabel, tabs, side, langToggle = false, children
           </>
         ) : null}
       </aside>
-
-      <main className="phone-frame" aria-label={appLabel} lang={langToggle ? lang : 'en'}>
-        <PhoneLayoutContext.Provider value={{ langToggle }}>
-          <div className="phone-main">{children}</div>
-        </PhoneLayoutContext.Provider>
-        <PhoneTabBar tabs={tabs} label={langToggle ? undefined : 'Main menu'} />
-      </main>
     </div>
   );
 }

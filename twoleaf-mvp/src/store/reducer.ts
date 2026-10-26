@@ -58,7 +58,6 @@ function applyCorrection(state: AppState, cmd: CorrectionCommand): AppState {
     reversalOf: original.uuid,
     correctionOf: null,
     correction: note,
-    clerkUuid: cmd.byUuid,
     hash: '',
   };
   const reversal: Delivery = { ...reversalBase, hash: deliveryHash(reversalBase) };
@@ -80,7 +79,6 @@ function applyCorrection(state: AppState, cmd: CorrectionCommand): AppState {
     reversalOf: null,
     correctionOf: original.uuid,
     correction: note,
-    clerkUuid: cmd.byUuid,
     hash: '',
   };
   const corrected: Delivery = { ...correctedBase, hash: deliveryHash(correctedBase) };

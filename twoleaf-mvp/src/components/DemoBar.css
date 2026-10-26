@@ -41,14 +41,6 @@
 }
 .demo-bar-confirm-actions { display: flex; justify-content: flex-end; gap: var(--space-2); flex-wrap: wrap; }
 
-/* Toast */
-.demo-bar-toast {
-  position: fixed; left: 50%; bottom: var(--space-5); z-index: 60; transform: translateX(-50%);
-  width: max-content; max-width: calc(100vw - 2 * var(--space-4));
-  pointer-events: none;
-}
-.demo-bar-toast .tl-alert { box-shadow: var(--shadow-md); border: 1px solid var(--border); pointer-events: auto; }
-
 @media (max-width: 1099px) {
   .demo-bar { padding: 0 var(--space-4); }
   .demo-bar .demo-bar-role label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
