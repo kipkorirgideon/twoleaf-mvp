@@ -1,7 +1,7 @@
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { StoreProvider } from './store';
-import { DesignPage } from './design-system/DesignPage';
-import { Icon, ToastProvider } from './design-system';
+import { Icon, Spinner, ToastProvider } from './design-system';
 import { DemoBar } from './components/DemoBar';
 import { RolePicker } from './roles/RolePicker';
 import { CountyApp } from './roles/county/CountyApp';
@@ -10,6 +10,20 @@ import { ClerkApp } from './roles/clerk/ClerkApp';
 import { FarmerApp } from './roles/farmer/FarmerApp';
 import { PluckerApp } from './roles/plucker/PluckerApp';
 import './AppShell.css';
+
+/**
+ * The design-system gallery is a developer page, so it is split out of the main
+ * bundle. `DesignPage` is a named export, hence the `then` mapping to `default`.
+ */
+const DesignPage = lazy(() => import('./design-system/DesignPage').then((m) => ({ default: m.DesignPage })));
+
+function RouteLoading() {
+  return (
+    <div className="app-route-loading">
+      <Spinner label="Loading…" />
+    </div>
+  );
+}
 
 function NotFound() {
   return (
@@ -40,7 +54,14 @@ export function App() {
           <div className="app-body">
             <Routes>
               <Route path="/" element={<RolePicker />} />
-              <Route path="/design/*" element={<DesignPage />} />
+              <Route
+                path="/design/*"
+                element={
+                  <Suspense fallback={<RouteLoading />}>
+                    <DesignPage />
+                  </Suspense>
+                }
+              />
               <Route path="/county/*" element={<CountyApp />} />
               <Route path="/factory/*" element={<FactoryApp />} />
               <Route path="/clerk/*" element={<ClerkApp />} />

@@ -90,7 +90,7 @@ export function RolePicker() {
         <h1 className="h1">Choose a role to explore</h1>
         <p className="body-lg text-muted">
           See how TwoLeaf records tea deliveries, leaf quality and bonus payments for Kericho County, from the buying centre scale to the county
-          dashboard.
+          dashboard. All names, figures and records in this demo are invented.
         </p>
       </div>
 
