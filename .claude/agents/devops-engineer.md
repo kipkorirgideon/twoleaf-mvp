@@ -47,11 +47,11 @@ Run these in order. Stop at the first failure and report it; never work around a
      "rewrites": [{ "source": "/((?!assets/).*)", "destination": "/index.html" }]
    }
    ```
-4. **Credentials.** The CLI is not installed and there is no stored login in this environment. Check for `VERCEL_TOKEN` in the environment. If it is missing, stop and report exactly this, with no deploy attempted:
-   > Deploy blocked: no Vercel credentials. Either export `VERCEL_TOKEN` (Vercel dashboard → Settings → Tokens) in this shell, or run `npx vercel login` once in an interactive terminal.
+4. **Credentials.** The Vercel CLI is installed globally and this machine has a stored interactive session. Confirm it with `vercel whoami`. Use the stored session — no `--token` flag, and `VERCEL_TOKEN` is not needed. If `whoami` fails, stop and report:
+   > Deploy blocked: the stored Vercel session is gone. Run `vercel login` once in an interactive terminal.
 
-   Never print the token, never echo it into a file, and never commit it. There are no other secrets in this project — the demo has no backend and no API keys.
-5. **Deploy.** `npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"`. On the first ever deploy the CLI links the project; accept the defaults for a Vite app (`dist`, `npm run build`) and record the project name in your report.
+   If a token ever is used, never print it, never echo it into a file, and never commit it. There are no other secrets in this project — the demo has no backend and no API keys.
+5. **Deploy.** `vercel deploy --prod --yes` from the repo root. On the first ever deploy the CLI links the project; `vercel.json` already pins the Vite settings (`dist`, `npm run build`). Record the project name in your report. The link writes `.vercel/project.json`, which is gitignored and must stay that way.
 6. **Verify the live site.** `curl -sSf -o /dev/null -w '%{http_code}' <deployment-url>` must return 200, and so must a deep link such as `<url>/county/factories` — that is the rewrite working. Also `curl -s <url> | grep -q 'data-theme="light"'` to confirm the light default shipped. If any check fails, report it and say the deployment is live but broken; do not silently roll back.
 
 ## Git

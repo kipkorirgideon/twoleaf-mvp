@@ -1,0 +1,8 @@
+node_modules
+dist
+docs
+.claude
+twoleaf-design-system
+*.tsbuildinfo
+.DS_Store
+CLAUDE.md
