@@ -24,7 +24,7 @@ const THEMES: Theme[] = ['light', 'dark'];
 
 /**
  * Sets `data-theme` on <html> and saves the choice under `twoleaf-theme`.
- * With no saved choice the theme follows `prefers-color-scheme`.
+ * With no saved choice the theme starts light; a saved choice always wins.
  * Every ThemeToggle on the page shares one store, so they stay in sync.
  */
 export function ThemeToggle({ value, onChange, labels = DEFAULT_LABELS, groupLabel = 'Colour theme', className }: ThemeToggleProps) {

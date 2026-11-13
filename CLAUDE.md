@@ -21,6 +21,8 @@ You are the **lead**. You plan, delegate and integrate. You do not write feature
 | `web-app-engineer` | `src/App.tsx`, `src/AppShell.css`, `src/roles/RolePicker.*`, `src/components/DemoBar.*`, `src/components/web/**` (components shared by county and factory), `src/layouts/WebLayout.*`, `src/roles/county/**`, `src/roles/factory/**` | 3, 4, 7, 9 |
 | `mobile-app-engineer` | `src/layouts/PhoneLayout.*`, `src/roles/clerk/**`, `src/roles/farmer/**`, `src/roles/plucker/**`, `src/lib/i18n.ts` | 5, 6, 9 |
 | `qa-reviewer` | Nothing (read-only, may run commands) | 8, 9 and after every phase |
+| `pr-reviewer` | Nothing (read-only, may run commands) | Any open PR, before merge |
+| `devops-engineer` | `vercel.json`, `.vercelignore`, `.gitignore`, `package.json` scripts, `.github/workflows/**` | Deploy, after QA and PR review pass |
 
 ### How to run the build
 
@@ -29,6 +31,8 @@ You are the **lead**. You plan, delegate and integrate. You do not write feature
 3. Phases 4 + 7 (`web-app-engineer`) in parallel with phases 5 + 6 (`mobile-app-engineer`).
 4. After each phase: `qa-reviewer` checks it against the spec. Send each issue back to the agent that owns the file. Repeat until the reviewer reports no blocking issues.
 5. Phase 8 (cross-role flows) and phase 9 (polish): `qa-reviewer` reviews, owners fix.
+6. Pull requests: `pr-reviewer` reviews the branch diff before any merge into `main`. It reviews the diff; `qa-reviewer` reviews the phase. Send each finding to the agent that owns the file.
+7. Deploy: `devops-engineer` builds and deploys to Vercel, and only after **both** reviewers have passed — `qa-reviewer` with no blocking issues and `pr-reviewer` with Approve or Approve with comments. Name both results in its task message; it refuses to deploy without them.
 
 ### Rules for delegating
 

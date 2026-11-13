@@ -3,7 +3,7 @@
  * Styles: import tokens.css, components/bundle.css and components/additions.css once (main.tsx does this).
  */
 export { cx } from './cx';
-export { useTheme, setTheme, getTheme, readStoredTheme, systemTheme, THEME_STORAGE_KEY } from './theme';
+export { useTheme, setTheme, getTheme, readStoredTheme, THEME_STORAGE_KEY } from './theme';
 export type { Theme } from './theme';
 export * from './assets';
 

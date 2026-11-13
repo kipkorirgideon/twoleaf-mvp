@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Badge, Icon, Skeleton, twoleafLogoDarkUrl, twoleafLogoUrl, useTheme, type IconName } from '../design-system';
+import { Badge, Icon, Skeleton, poweredByDarkUrl, poweredByLightUrl, useTheme, type IconName } from '../design-system';
 import { useQuery } from '../api';
 import type { Role, Session } from '../types';
 import './RolePicker.css';
@@ -87,13 +87,6 @@ export function RolePicker() {
   return (
     <main className="role-picker">
       <div className="role-picker-intro">
-        <img
-          className="role-picker-logo"
-          src={theme === 'dark' ? twoleafLogoDarkUrl : twoleafLogoUrl}
-          alt="TwoLeaf"
-          width={220}
-          height={64}
-        />
         <h1 className="h1">Choose a role to explore</h1>
         <p className="body-lg text-muted">
           See how TwoLeaf records tea deliveries, leaf quality and bonus payments for Kericho County, from the buying centre scale to the county
@@ -127,6 +120,16 @@ export function RolePicker() {
           );
         })}
       </ul>
+
+      <footer className="role-picker-footer">
+        <img
+          className="role-picker-powered"
+          src={theme === 'dark' ? poweredByDarkUrl : poweredByLightUrl}
+          alt="Powered by Mariakani Labs"
+          width={178}
+          height={26}
+        />
+      </footer>
     </main>
   );
 }

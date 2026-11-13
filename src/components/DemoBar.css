@@ -9,16 +9,15 @@
   box-shadow: var(--shadow-sm);
 }
 
-.demo-bar-brand { display: flex; align-items: center; gap: var(--space-2); min-width: 0; }
+/* The brand is one link back to the role picker. Styling stays as quiet as the old static mark. */
+.demo-bar-brand {
+  display: flex; align-items: center; gap: var(--space-2); flex: none;
+  color: inherit; text-decoration: none; border-radius: var(--radius-sm);
+}
+.demo-bar-brand:hover .demo-bar-name { color: var(--primary); }
+.demo-bar-brand:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .demo-bar-icon { width: 28px; height: 28px; flex: none; border-radius: var(--radius-sm); }
 .demo-bar-name { font: 600 15px/20px var(--font-display); color: var(--text); white-space: nowrap; }
-.demo-bar-pill {
-  min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  padding: 2px var(--space-2); border-radius: var(--radius-pill);
-  background: var(--warning-bg); color: var(--warning-fg);
-  font: 500 12px/18px var(--font-sans);
-}
-
 .demo-bar-controls { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
 
 /* "Viewing as" select: label beside the field, not above it */
@@ -52,7 +51,9 @@
     flex-direction: column; align-items: stretch; justify-content: center; gap: var(--space-2);
     padding: var(--space-2) var(--space-4);
   }
-  .demo-bar-brand { height: 36px; }
+  /* 8 + 44 + 44 + 8 fills the 104px narrow bar exactly, so both rows stay 44px tall. */
+  .demo-bar { gap: 0; }
+  .demo-bar-brand { min-height: 44px; }
   .demo-bar-controls { height: 44px; gap: var(--space-2); }
   .demo-bar .demo-bar-role { flex: 1; }
   .demo-bar .demo-bar-role select { flex: 1; width: 100%; max-width: none; min-height: 44px; }

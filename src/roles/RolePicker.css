@@ -1,13 +1,12 @@
 /* Role picker. Tokens only. */
 
 .role-picker {
-  width: 100%; max-width: 1120px; margin: 0 auto;
+  width: 100%; max-width: 1120px; min-height: 100%; margin: 0 auto;
   padding: var(--space-7) var(--space-5);
   display: flex; flex-direction: column; gap: var(--space-6);
 }
 
 .role-picker-intro { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); max-width: 680px; }
-.role-picker-logo { width: 200px; height: auto; margin-bottom: var(--space-2); }
 
 .role-picker-grid {
   list-style: none; margin: 0; padding: 0;
@@ -41,8 +40,18 @@
 }
 .role-card-go .tl-icon { width: 16px; height: 16px; }
 
+.role-picker-powered { height: 26px; width: auto; }
+
+.role-picker-footer {
+  margin-top: auto;
+  padding-top: var(--space-5);
+  display: flex; justify-content: center;
+  border-top: 1px solid var(--border);
+}
+
 @media (max-width: 599px) {
   .role-picker { padding: var(--space-5) var(--space-4); gap: var(--space-5); }
-  .role-picker-logo { width: 160px; }
   .role-card { min-height: 0; padding: var(--space-4); }
+  .role-picker-footer { padding-top: var(--space-4); }
+  .role-picker-powered { height: 22px; }
 }

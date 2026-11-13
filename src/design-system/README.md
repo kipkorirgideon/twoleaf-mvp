@@ -30,7 +30,7 @@ Status colours (`success`, `warning`, `danger`, `info`, each with `-fg` and `-bg
 
 ## Theme
 
-Both themes ship in `tokens.css` and switch with `data-theme="light"` or `"dark"` on `<html>`. Use the **ThemeToggle** component in the sidebar footer. On first load, follow the device's `prefers-color-scheme`, then remember the person's choice (`localStorage` key `twoleaf-theme`).
+Both themes ship in `tokens.css` and switch with `data-theme="light"` or `"dark"` on `<html>`. Use the **ThemeToggle** component in the sidebar footer. On first load the theme is light; the person's choice is then remembered (`localStorage` key `twoleaf-theme`) and wins on later loads.
 
 ## Typography
 

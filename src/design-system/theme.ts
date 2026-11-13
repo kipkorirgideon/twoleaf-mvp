@@ -4,9 +4,10 @@ import { useCallback, useSyncExternalStore } from 'react';
  * Theme store shared by every ThemeToggle and by `useTheme()`.
  *
  * - The theme lives on `<html data-theme="light|dark">`.
- * - On first load, with no saved choice, it follows `prefers-color-scheme`
- *   (and keeps following it if the device setting changes).
- * - Once the person picks a theme it is saved under `twoleaf-theme`.
+ * - On first load, with no saved choice, the demo starts in the light theme.
+ *   The device's `prefers-color-scheme` is deliberately ignored.
+ * - Once the person picks a theme it is saved under `twoleaf-theme` and that
+ *   remembered choice wins on every later load.
  *
  * `index.html` runs the same logic inline before first paint, so there is no flash.
  */
@@ -27,27 +28,14 @@ export function readStoredTheme(): Theme | null {
   }
 }
 
-function systemQuery(): MediaQueryList | null {
-  try {
-    return typeof window.matchMedia === 'function' ? window.matchMedia('(prefers-color-scheme: dark)') : null;
-  } catch {
-    return null;
-  }
-}
-
-export function systemTheme(): Theme {
-  return systemQuery()?.matches ? 'dark' : 'light';
-}
-
 function initialTheme(): Theme {
   const attr = document.documentElement.getAttribute('data-theme');
   if (isTheme(attr)) return attr;
-  return readStoredTheme() ?? systemTheme();
+  return readStoredTheme() ?? 'light';
 }
 
 let current: Theme | null = null;
 const listeners = new Set<() => void>();
-let mediaBound = false;
 
 function apply(theme: Theme): void {
   current = theme;
@@ -55,23 +43,10 @@ function apply(theme: Theme): void {
   listeners.forEach((l) => l());
 }
 
-function bindSystemListener(): void {
-  if (mediaBound) return;
-  mediaBound = true;
-  const mq = systemQuery();
-  if (!mq) return;
-  const onChange = (e: MediaQueryListEvent): void => {
-    // Follow the device only until the person has made a choice.
-    if (readStoredTheme() === null) apply(e.matches ? 'dark' : 'light');
-  };
-  if (typeof mq.addEventListener === 'function') mq.addEventListener('change', onChange);
-}
-
 export function getTheme(): Theme {
   if (current === null) {
     current = initialTheme();
     document.documentElement.setAttribute('data-theme', current);
-    bindSystemListener();
   }
   return current;
 }

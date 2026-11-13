@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ChangeEvent, type KeyboardEvent } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Alert, Button, SelectField, ThemeToggle, twoleafIconUrl, useToast } from '../design-system';
 import { useMutation } from '../api';
 import type { Role } from '../types';
@@ -79,13 +79,10 @@ export function DemoBar() {
 
   return (
     <header className="demo-bar">
-      <div className="demo-bar-brand">
-        <img className="demo-bar-icon" src={twoleafIconUrl} alt="" width={28} height={28} />
-        <span className="demo-bar-name">TwoLeaf demo</span>
-        <span className="demo-bar-pill" title="Demo · all data is invented">
-          Demo · all data is invented
-        </span>
-      </div>
+      <Link className="demo-bar-brand" to="/" aria-label="TwoLeaf home">
+        <img className="demo-bar-icon" src={twoleafIconUrl} alt="" aria-hidden="true" width={28} height={28} />
+        <span className="demo-bar-name">TwoLeaf</span>
+      </Link>
 
       <div className="demo-bar-controls">
         <SelectField label="Viewing as" className="demo-bar-role" value={current} onChange={onRoleChange}>
